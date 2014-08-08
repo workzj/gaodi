@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="部门发文" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="85,58,48,48" name="start1">
+      <transition to="部门拟稿"/>
+   </start>
+   <task assignee="#{user}" form="bmfw/beginNigao.action?url=" g="62,250,92,52" name="部门拟稿">
+      <transition g="7,-17" name="to 部门文秘" to="部门文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/bu_men_wen_mi.jsp" g="61,426,92,52" name="部门文秘">
+      <transition g="70,346:-65,-15" name="to 部门拟稿" to="部门拟稿"/>
+      <transition g="19,-7" name="to 部门审核" to="部门审核"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/bu_men_shen_he.jsp" g="189,342,92,52" name="部门审核">
+      <transition g="-34,-9" name="to 返部门文秘" to="返部门文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/fan_bu_men_wen_mi.jsp" g="322,248,92,52" name="返部门文秘">
+      <transition g="-30,-21" name="to 部门拟稿" to="部门拟稿"/>
+      <transition g="264,281:-78,15" name="to 部门审核" to="部门审核"/>
+      <transition g="13,-15" name="to 校办文秘" to="校办文秘"/>
+      <transition g="-55,-42" name="to 党办文秘" to="党办文秘"/>
+      <transition g="206,232:26,-7" name="to 领导签发" to="领导签发"/>
+      <transition g="420,339:-30,-31" name="to 校对" to="校对"/>
+      <transition g="-25,-18" name="to 发文封发" to="发文封发"/>
+      <transition g="-41,8" name="to foreach1" to="foreach1"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/jiao_dui.jsp" g="450,318,92,52" name="校对">
+      <transition g="5,-12" name="to 返部门文秘" to="返部门文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/xiao_ban_wen_mi.jsp" g="361,146,92,52" name="校办文秘">
+      <transition g="-80,-15" name="to 办公室主任" to="办公室主任"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/ling_dao_qian_fa.jsp" g="159,145,92,52" name="领导签发">
+      <transition g="295,170;319,206:-76,10" name="to 返部门文秘" to="返部门文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/dang_ban_wen_mi.jsp" g="241,56,92,52" name="党办文秘">
+      <transition g="-41,-33" name="to 办公室主任" to="办公室主任"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/ban_gong_shi_zhu_ren.jsp" g="361,57,92,52" name="办公室主任">
+      <transition g="-39,18" name="to 返两办文秘" to="返两办文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/fan_liang_ban_wen_mi.jsp" g="505,57,92,52" name="返两办文秘">
+      <transition g="479,34:-42,-18" name="to 办公室主任" to="办公室主任"/>
+      <transition g="-42,13" name="to 校分管领导" to="校分管领导"/>
+      <transition g="-35,23" name="to 发文封发" to="发文封发"/>
+      <transition g="-36,13" name="to foreach2" to="foreach2"/>
+      <transition g="504,227:-55,-90" name="to 返部门文秘" to="返部门文秘"/> 
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/xiao_fen_guan_ling_dao.jsp" g="661,57,92,52" name="校分管领导">
+      <transition g="627,35:-37,-19" name="to 返两办文秘" to="返两办文秘"/>
+   </task>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/fa_wen_feng_fa.jsp" g="506,247,92,52" name="发文封发">
+      <transition g="5,-14" name="to 存档" to="存档"/>
+   </task>
+   <end g="685,311,48,48" name="end1"/>
+   <java class="business.SaveDoc" g="505,420,92,52" method="save" name="存档" var="result">
+   		<arg><object expr="#{processInstanceId}"/></arg>
+      <transition g="-29,-18" name="toBeiFen" to="备份"/>
+   </java>
+   <sub-process g="329,427,92,52" name="会签" sub-process-key="sub">
+      <parameter-in subvar="user" var="u"/>
+      <parameter-in subvar="processInstanceId" var="processInstanceId"/>
+      <parameter-in subvar="basicInfoId" var="basicInfoId"/>
+      <parameter-out subvar="subresult" var="subresult"/>
+      <transition to="join1"/>
+   </sub-process>
+   <foreach g="395,363,48,48" in="#{users}" name="foreach1" var="u">
+      <transition to="会签"/>
+   </foreach>
+   <join g="297,362,48,48" multiplicity="${num}" name="join1">
+      <transition to="返部门文秘"/>
+   </join>
+   <foreach g="681,126,48,48" in="#{users}" name="foreach2" var="u">
+      <transition to="会 签"/>
+   </foreach>
+   <sub-process g="659,200,92,52" name="会 签" sub-process-key="sub">
+      <parameter-in subvar="user" var="u"/>
+      <parameter-in subvar="processInstanceId" var="processInstanceId"/>
+      <parameter-in subvar="basicInfoId" var="basicInfoId"/>
+      <parameter-out subvar="subresult" var="subresult"/>
+      <transition to="join2"/>
+   </sub-process>
+   <join g="580,202,48,48" multiplicity="${num}" name="join2">
+      <transition to="返两办文秘"/>
+   </join>
+   <task assignee="#{user}" form="bmfw/beginCommonTask.action?url=bmfw/beifen.jsp" g="663,419,91,51" name="备份">
+      <transition g="10,-1" name="toEnd" to="end1"/>
+   </task>
+</process>

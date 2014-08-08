@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="test1" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="271,19,92,48" name="start1">
+      <transition g="-71,-17" name="to 业务受理" to="业务受理"/>
+   </start>
+   <end g="278,549,92,48" name="end1"/>
+   <task g="251,90,92,52" name="业务受理">
+      <transition g="465,110;468,574:-47,-17" name="to end1" to="end1"/>
+      <transition g="-71,-17" name="to 现场勘查" to="现场勘查"/>
+   </task>
+   <task g="254,171,92,52" name="现场勘查">
+      <transition g="-72,-6" name="to 预评撰写" to="预评撰写"/>
+   </task>
+   <task g="256,249,92,52" name="预评撰写">
+      <transition g="-71,-5" name="to 预评审查" to="预评审查"/>
+   </task>
+   <task g="256,348,92,52" name="预评审查">
+      <transition g="203,376;202,276:-71,-17" name="to 预评撰写" to="预评撰写"/>
+      <transition g="-71,-17" name="to 预评审批" to="预评审批"/>
+   </task>
+   <task g="254,445,92,52" name="预评审批">
+      <transition g="-47,-17" name="to end1" to="end1"/>
+      <transition g="407,472;409,273:-71,-41" name="to 预评撰写" to="预评撰写"/>
+   </task>
+</process>

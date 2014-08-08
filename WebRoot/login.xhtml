@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+<link href="./css/main_b.css" rel="stylesheet" type="text/css" />
+  <title>河南省郑州市房屋交易管理系统</title>
+</h:head>
+<body class="main">
+<f:view>
+<h:form>
+<p:growl id="growl" showDetail="true" /> 
+<table width="100%" height="100%">
+	<tr>
+		<td align="center">
+			<div class="cot"> 	
+			  <br/><br/><br/><br/><br/><br/><br/><br/>
+		      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fm1">
+			        <tr>
+			          <td align="right">用户名</td>
+			          <td height="40">
+			          <h:inputText value="#{login.name}" required="true" requiredMessage="请输入用户名" styleClass="input-in" /></td>
+			        </tr>
+			        <tr>
+			          <td align="right">密码</td>
+			          <td height="40">
+			          <h:inputSecret value="#{login.password}" required="true" requiredMessage="请输入密码" styleClass="input-in"/></td>
+			        </tr>
+			        <tr>
+			          <td>&#160;</td>
+			          <td height="70">
+			          <h:commandButton action="#{login.loginAction}" styleClass="input-btn"/>
+			          
+			          </td>
+			        </tr>
+			        <tr>
+			          <td colspan="2" height="70" align="center"><span class="c-w">© Copyright  2013 V1.0</span></td>
+			        </tr>
+		      </table>
+				      
+			</div>
+		</td>
+	</tr>
+</table>
+</h:form>
+</f:view>
+</body>
+
+</html>

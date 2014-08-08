@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+
+<h:form enctype="multipart/form-data" >
+	<tr></tr>
+	<p:fileUpload fileUploadListener="#{deployProcess.fileDeploy}" 
+	            mode="advanced"  
+	            label="选择文件"
+	            uploadLabel="发布"
+	            cancelLabel="取消"
+	            update="messages"   
+	            multiple="true"  
+	            invalidFileMessage="不是ZIP文件"
+	            invalidSizeMessage="文件超过大小"
+	            sizeLimit="100000"
+	            allowTypes="/(\.|\/)(zip)$/"/>  
+  
+    <p:growl id="messages" showDetail="true"/>  
+</h:form>  
+
+</html>
+

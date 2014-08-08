@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<title>用户管理</title>
+<link href="css/table.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+<f:view>
+	<h:form id="welcomeForm">
+	
+		<table class="table01" border="0" id="userlist" cellpadding="0" cellspacing="1">
+			<tr>
+				<td style="height: 352px; width: 535px">
+					<div style="height:100%; overflow-x:hidden;overflow-y:auto;" class="kj-main" id="kj">
+					<p:dataTable emptyMessage="没有记录" width="100%" id="tb1" border="0" headerClass="Freezing"
+					value="#{usermanager.listuser}" scrollable="true" rows="10" paginator="true"
+					styleClass="wap1" var="prj">
+					<p:column>
+						<f:facet name="header">
+						<h:outputText value="用户名"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{prj.name}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+						<h:outputText value="昵称"/>
+						</f:facet>
+						<h:outputText value="#{prj.nikename}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">
+						<h:outputText value="角色"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{prj.rolename}" />
+					</p:column>
+					
+					<p:column>
+						<p:commandLink value="删除" immediate="true" update="tb1" actionListener="#{usermanager.DeleteUserAction}" >
+							<f:attribute name="userid" value="#{prj.iduserFy}"/>
+						</p:commandLink>
+					</p:column>
+					</p:dataTable></div>
+				</td>
+			</tr>
+	</table>
+	<table>
+			<p:growl id="growl" showDetail="true" /> 
+			<tr>
+				<th id="thtitle" colspan="2">添加用户</th>
+			</tr>
+	
+			<tr>
+				<td align="right">用户名称:</td>
+				<td align="left">
+					<p:inputText value="#{usermanager.user.name}"  required="true" requiredMessage="请输入用户名"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">密码:</td>
+				<td align="left">
+					<p:password value="#{usermanager.user.password}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">再次输入密码:</td>
+				<td align="left">
+					<p:password value="#{usermanager.password2}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">昵称:</td>
+				<td align="left">
+					<p:inputText value="#{usermanager.user.nikename}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">用户角色:</td>
+				<td align="left">
+					<h:selectOneMenu value="#{usermanager.user.rolename}" required="true" styleClass="select">  
+       					<f:selectItem itemLabel="受理员" itemValue="shouli"/>
+       					<f:selectItem itemLabel="勘察员" itemValue="kancha"/>
+       					<f:selectItem itemLabel="评估员" itemValue="pinggu"/>
+       					<f:selectItem itemLabel="审核员" itemValue="manager"/>
+       					<f:selectItem itemLabel="审批员" itemValue="shenpi"/>
+       					<f:selectItem itemLabel="送达员" itemValue="worker"/>
+       				</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><h:commandButton value="添加" action="#{usermanager.AddUser}" styleClass="btn01"/></td>
+			</tr>
+
+		</table>
+	</h:form>
+</f:view>
+
+</html>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html	xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+
+<title>后台管理</title>
+<link href="css/table.css" rel="stylesheet" type="text/css" />
+</head>
+<script type="text/javascript" charset="UTF-8">
+	function UserOnclick()    //用户管理
+	{
+		window.frames["frame_content"].location.href = "usermanager.faces";
+	}
+
+	function ProcessOnclick()    //流程管理
+	{
+		window.frames["frame_content"].location.href = "process.faces";
+
+	}
+</script>
+<body bgcolor="#F5F8FA">
+<div class="header-top">
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br/>BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+<span class="r ptr10X15">
+<a href="login.faces" style="cursor: pointer;" title="退出">
+<img src="images/i_right.gif"/></a>
+</span>
+<span class="r ptr10X15">
+
+</span>  
+<div class="clear">
+</div>
+</div>
+<div class="menu-children">
+<ul class="l">
+	<li class="on" id="gwgl" style="cursor: pointer;"><a onclick="UserOnclick();"><span>用户管理</span></a></li>
+	<li id="zskgl" style="cursor: pointer;"><a onclick="ProcessOnclick();"><span>流程管理</span></a></li>
+</ul>
+<div class="clear"></div>
+</div>
+<iframe id="frame_content" name="frame_content" src="usermanager.faces" width="100%"  height="750px;"/> 
+</body>
+</html>

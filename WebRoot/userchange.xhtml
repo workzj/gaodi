@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+<title>更改用户</title>
+<link href="css/table.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+</h:head>
+<f:view>
+<div class="header-top">
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br/>BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+
+<span class="ptr10X15">
+<a onclick="history.back()" style="cursor: pointer;" title="后退">
+<img src="images/i_left.gif"/></a>
+<a href="login.faces" style="cursor: pointer;" title="退出">
+<img src="images/i_right.gif"/></a>
+</span> <div class="clear">
+</div>
+</div>
+<div class="clear"></div>
+	<h:form id="welcomeForm">
+	
+		<table class="table01" border="0"  cellpadding="0" cellspacing="1">
+			
+			<tr>
+				<th id="thtitle" colspan="2">更改用户</th>
+			</tr>
+			<tr>
+				<td align="right">用户名:</td>
+				<td align="left">
+					<h:outputText value="#{userchange.user.name}" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">原密码:</td>
+				<td align="left">
+					<p:password value="#{userchange.oldpassword}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">昵称:</td>
+				<td align="left">
+					<p:inputText value="#{userchange.user.nikename}" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">新密码:</td>
+				<td align="left">
+					<p:password value="#{userchange.password}" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">再次输入密码:</td>
+				<td align="left">
+					<p:password value="#{userchange.password2}" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><h:commandButton value="修改" action="#{userchange.ChangeUser}" styleClass="btn01"/></td>
+			</tr>
+
+		</table>
+	</h:form>
+</f:view>
+
+</html>
+

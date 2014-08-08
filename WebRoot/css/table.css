@@ -1,0 +1,29 @@
+th { 
+	font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif; 
+	color: #262626; 
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7; 
+	letter-spacing: 2px; 
+	text-transform: uppercase;
+	text-align: center; 
+	padding: 6px 6px 6px 12px; 
+	background: #BFDCE6  no-repeat; 
+} 
+td { 
+	border-bottom: 1px solid #C1DAD7;
+	background: #FFFFFF; 
+	font-size:11px; 
+	padding: 6px 6px 6px 12px; 
+	color: #262626; 
+}
+body 
+{ 	
+	margin:0;
+} 
+
+
+.btn01 {width:100px;height:30px;color:#fff;font-size:14px;font-weight:bold;text-align:center;background:url(../images/mic-btn01.gif) no-repeat 0 0;border:0;cursor:pointer;margin:0;}
+.btn01:hover {background:url(../images/mic-btn01.gif) no-repeat 0 -30px;}
+
+ 
+}

@@ -1,0 +1,30 @@
+注入的两个要点：
+
+<managed-property>
+	<property-name>userService</property-name>
+	<value>#{userService}</value>
+</managed-property>
+
+1、bean id 命名首字母要小写；（这个最关键）
+2、要特别注意大小写，name和value的大小写要一致，不然注入的值为NULL。（太扯犊子了）
+
+tomcat7需要加入这一行:
+catalina.properties
+org.apache.el.parser.COERCE_TO_ZERO=false
+
+myeclipse设置jvm内存大小(即设置tomcat的jvm内存大小)
+    windows-->preference-->MyEclipse-->Servers-->Tomcat-->Tomcatx.x-->JDK
+    在右边的Optional Java VM arguments里加上:-Xms256m -Xmx512m
+
+这个问题的根源是jvm虚拟机的默认Heap大小是64M,可以通过设置其最大和最小值来实现.设置的方法主要是几个.
+
+1.可以在windows 更改系统环境变量
+加上JAVA_OPTS=-Xms64m -Xmx512m
+
+2,如果用的tomcat,在windows下,可以在
+
+C:\tomcat5.5.9\bin\catalina.bat  中加上:
+
+set JAVA_OPTS=-Xms64m -Xmx256m
+
+位置在: rem Guess CATALINA_HOME if not defined  这行的下面加合适.

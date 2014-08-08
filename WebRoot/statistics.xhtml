@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head><link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/table.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+PrimeFaces.locales['zh_CN'] = {
+    closeText: '关闭',
+    prevText: '上个月',
+    nextText: '下个月',
+    currentText: '今天',
+    monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+    monthNamesShort: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+    dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+    dayNamesShort: ['日','一','二','三','四','五','六'],
+    dayNamesMin: ['日','一','二','三','四','五','六'],
+    weekHeader: '周',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: true,
+    yearSuffix: '', // 年
+    timeOnlyTitle: '仅时间',
+    timeText: '时间',
+    hourText: '时',
+    minuteText: '分',
+    secondText: '秒',
+    ampm: false,
+    month: '月',
+    week: '周',
+    day: '日',
+    allDayText : '全天'
+};
+</script>
+
+</h:head>
+<div class="header-top" > </div>
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br/>BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+<span class="r ptr10X15">
+<a onclick="history.back();" style="cursor: pointer;" title="退出">
+<img src="images/i_right.gif"/></a>
+</span> <span class="r ptr10X15">
+#{login.password}&nbsp;&nbsp;#{login.name}，欢迎您使用高地经典房地产评估系统。
+</span>
+<div class="clear"></div>
+<div class="header-tool"><h1 class="logo"><a href="#" class="l pl10"><img src="images/logo_jd.png"/>综合统计</a></h1>
+</div>
+<div class="clear"></div>
+	<h:form>
+		<p:panelGrid columns="6">  
+		    <f:facet name="header">  
+		        	请选择统计时间段  
+		    </f:facet>
+		    <h:outputLabel  value="开始时间： *" />
+		    <p:calendar pattern="yyyy年MM月dd日" size="14" locale="zh_CN" value="#{ProjectStatistics.searchPj.shouliDateMin}" showButtonPanel="true" navigator="true" />
+		    <h:outputLabel value="结束时间： *" />
+		    <p:calendar pattern="yyyy年MM月dd日" size="14" locale="zh_CN" value="#{ProjectStatistics.searchPj.shouliDateMax}" showButtonPanel="true" navigator="true" />
+		    <h:outputLabel value="业务来源：(可选) " />
+		    <h:selectOneMenu value="#{ProjectStatistics.source}" styleClass="select">  
+       					<f:selectItem itemLabel="全部" />
+       					<f:selectItem itemLabel="公积金" itemValue="公积金"/>
+       					<f:selectItem itemLabel="交通银行" itemValue="交行"/>
+       					<f:selectItem itemLabel="中国银行" itemValue="中行"/>
+       					<f:selectItem itemLabel="建设银行" itemValue="建行"/>
+       					<f:selectItem itemLabel="工商银行" itemValue="工行"/>
+       					<f:selectItem itemLabel="农业银行" itemValue="农行"/>
+       					<f:selectItem itemLabel="邮政储蓄" itemValue="邮政"/>
+       					<f:selectItem itemLabel="兴业银行" itemValue="兴业银行"/>
+       		</h:selectOneMenu>
+		    <f:facet name="footer">  
+		        <p:commandButton actionListener="#{ProjectStatistics.CountAction}" value="开始统计" update="totalStatus,chargeCount,taskinfo,totalinfo" style="margin:0"/>  
+		    </f:facet>  
+		</p:panelGrid>
+		
+		<br /><br />
+		<p:fieldset id="totalStatus" toggleable="true" legend="总体情况">
+			<p:panelGrid colspan="9">
+				<f:facet name="header">
+			        <p:row>  
+			            <p:column>总受理案件</p:column>
+			            <p:column>正在勘查</p:column>
+			            <p:column>正在预评</p:column>
+			            <p:column>正在审查</p:column>
+			            <p:column>正在审批</p:column>
+			            <p:column>出具预评</p:column>  
+			            <p:column>出具正式报告</p:column>
+			            <p:column>归档</p:column>
+			            <p:column>收费</p:column>
+			            <p:column>送达</p:column>  
+			        </p:row>
+			    </f:facet>
+			    <p:row>  
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.totalNum}" />件
+				        </FONT>
+			        </p:column>  
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.kanchaNum}" />件
+				        </FONT>
+			        </p:column>
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.yupingNum}" />件
+				        </FONT>
+			        </p:column>  
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.shenchaNum}" />件
+				        </FONT>
+			        </p:column>
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.shenpiNum}" />件
+				        </FONT>
+			        </p:column>  
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.yupingOverNum}" />件
+				        </FONT>
+			        </p:column>
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.officialOverNum}" />件
+				        </FONT>
+			        </p:column>
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.endNum}" />件
+				        </FONT>
+			        </p:column>  
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.chargeNum}" />件
+				        </FONT>
+			        </p:column>
+			        <p:column style="font-weight: bold;">
+			        	<FONT color="red">
+				        	<h:outputText value="#{ProjectStatistics.sendNum}" />件
+				        </FONT>
+			        </p:column>		  
+			    </p:row>
+			</p:panelGrid>
+		</p:fieldset>
+		<br /><br />
+		<p:fieldset id="chargeCount" toggleable="true" legend="明细统计">
+			<p:dataTable id="charge" var="source" value="#{ProjectStatistics.sourceInfo}">
+			    <p:column headerText="来源" id="source">
+					<FONT color="red">
+			        	<h:outputText value="#{source.name}" />
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="勘察阶段" id="kancha_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.kanchaNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="预评阶段" id="yuping_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.yupingNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="审查阶段" id="shencha_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.shenchaNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="审批阶段" id="shenpi_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.shenpiNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="已出预评" id="ypover_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.yupingOverNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="已出正式" id="ypoffice_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.officialOverNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="已完成" id="end_">
+					<FONT color="red">
+			        	<h:outputText value="#{source.endNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="已收费" id="hasMoney">
+					<FONT color="red">
+			        	<h:outputText value="#{source.chargeNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="未收费" id="noMoney">
+					<FONT color="red">
+			        	<h:outputText value="#{source.unChargeNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="合计" id="totalMoney">
+					<FONT color="red">
+			        	<h:outputText value="#{source.totalMoney}" />元
+			        </FONT>
+	            </p:column>
+			</p:dataTable>
+			<br />
+		    <p:panelGrid columns="3">
+			    <h:commandButton value="导出全部明细" action="#{ProjectStatistics.ExportSource}"  styleClass="btn01"/>
+			    <h:commandButton value="导出预评明细" action="#{ProjectStatistics.ExportYPSource}"  styleClass="btn01"/>
+			    <h:commandButton value="导出正式明细" action="#{ProjectStatistics.ExportZSSource}"  styleClass="btn01"/>
+		    </p:panelGrid>
+		</p:fieldset>
+		<br /><br />
+		<p:fieldset id="totalinfo" toggleable="true" legend="汇总统计">
+			<p:dataTable id="total" var="total" value="#{ProjectStatistics.totalInfo}">
+			    <p:column headerText="估价目的" id="purpose">
+					<FONT color="red">
+			        	<h:outputText value="#{total.purpose}" />
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="总件数" id="number">
+					<FONT color="red">
+			        	<h:outputText value="#{total.number}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="建筑面积" id="area">
+					<FONT color="red">
+			        	<h:outputText value="#{total.area}" />平米
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="合计价值" id="averageTime">
+					<FONT color="red">
+			        	<h:outputText value="#{total.price / 10000}" >
+			        		<f:convertNumber maxFractionDigits="2" pattern="#0.00" />
+			        	</h:outputText>万元
+			        </FONT>
+	            </p:column>
+			</p:dataTable>
+		</p:fieldset>
+		<br /><br />
+		<p:fieldset id="taskinfo" toggleable="true" legend="工作统计">
+			<p:dataTable id="task" var="task" value="#{ProjectStatistics.taskInfo}">
+			    <p:column headerText="姓名" id="name">
+					<FONT color="red">
+			        	<h:outputText value="#{task.assignee}" />
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="已完成" id="completed">
+					<FONT color="red">
+			        	<h:outputText value="#{task.completedNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="正在处理" id="uncompleted">
+					<FONT color="red">
+			        	<h:outputText value="#{task.processNum}" />件
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="平均完成时间" id="averageTime">
+					<FONT color="red">
+			        	<h:outputText value="#{task.totalTime / task.completedNum / 3600000}" >
+			        		<f:convertNumber maxFractionDigits="2" pattern="#0.00" />
+			        	</h:outputText>小时
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="任务" id="taskname">
+					<FONT color="red">
+			        	<h:outputText value="#{task.taskname}" />
+			        </FONT>
+	            </p:column>
+	            <p:column headerText="明细导出" id="exports">
+					 <h:commandLink value ="导出" actionListener="#{ProjectStatistics.ExportWorker}" >
+						<f:attribute  name="assignee" value="#{task.assignee}"/>
+					</h:commandLink>
+	            </p:column>
+			</p:dataTable>
+		</p:fieldset>
+
+	</h:form>
+	<ui:include src="foot.xhtml"/>
+</f:view>
+
+</html>
+
+	
+
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+</h:head>
+<f:view>
+
+<div class="header-top">
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br />BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+<span class="r ptr10X15">
+<a href="login.faces" style="cursor: pointer;" title="退出">
+<img src="images/i_right.gif"/></a>
+</span> <div class="clear">
+</div>
+</div>
+<div class="clear"></div>
+<div class="header-tool"><h1 class="logo"><a href="#" class="l pl10"><img src="images/logo_jd.png"/>预评审批</a></h1>
+<div class="clear"></div></div>
+	<h:form id="bj" style="display: inline;">
+		<div class="menu">
+			<h:commandLink styleClass="r c-f pr15" value="刷新" action="#{ShenpiProject.SearchAction}" /> 
+			<span class="r" ><a class="c-f pr15" href="projectAdd.faces" style="cursor: pointer;">案件登记</a></span>
+			<span class="r pr15" id="headcount" style="">有待审查案件(<b class="c-f"> </b>)条</span>
+		</div>
+		<div style="height:70%; overflow-x:hidden;overflow-y:auto;" class="kj-main" id="kj"><h:dataTable width="98%" id="tb1" border="0" headerClass="Freezing"
+			cellspacing="0" cellpadding="0" value="#{ShenpiProject.allprj}"
+			styleClass="wap1" var="prj">
+			<h:column>
+				<f:facet name="header">
+				<h:outputText value="编号"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.projectCode}" id="prjcode" ></h:outputText>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="立项日期"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.projectDate}"/>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="卖方"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.buyerName}" ></h:outputText>
+			&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="买方"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.sellerName}" ></h:outputText>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="产权证号"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseNumber}" ></h:outputText>
+				&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="成交日期"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.sellDate}"/>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="建筑面积"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseArea}"></h:outputText>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="评估价"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseEvaluateSingle}" />元/平米&nbsp;&nbsp;
+				<h:outputText value="#{prj.houseEvaluateTotal}" />元
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="成交价"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseFinalSingle}" />元/平米&nbsp;&nbsp;
+				<h:outputText value="#{prj.houseFinalTotal}" />元
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="楼层"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseAtLayer}" />/&nbsp;&nbsp;
+				<h:outputText value="#{prj.houseLayers}" />层&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="房屋地址"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseXy}" />&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="建成日期"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseDate}"/>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="结构"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{(prj.houseConstruction==0) ? '钢混' : '砖混'}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="装修"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{(prj.houseDecoration==0) ? '精装' : '简装'}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="用途"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.houseUse}"/>
+			</h:column>
+			<h:column>
+				<h:commandLink action="shenpi" immediate="true" actionListener="#{ShenpiProject.ShenpiAction}" >
+					&nbsp;&nbsp;&nbsp;审批&nbsp;&nbsp;&nbsp;
+					<f:attribute name="projectId" value="#{prj.idprojectFy}"/>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable></div>
+	</h:form>
+	<ui:include src="foot.xhtml"/>
+</f:view>
+</html>
+
+
+

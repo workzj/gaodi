@@ -1,0 +1,1280 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+
+<title>项目添加</title>
+<link href="css/table.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+<f:view>
+<div class="header-top">
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br />BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+<span class="r ptr10X15">
+<a onclick="history.back();" style="cursor: pointer;" title="退出">
+<img src="images/i_right.gif"/></a>
+</span>
+<span class="r ptr10X15">
+<p:outputLabel >
+#{login.password}&nbsp;&nbsp;#{login.name}，欢迎您使用高地经典房地产评估系统。</p:outputLabel>
+</span> 
+<div class="clear">
+</div>
+</div>
+
+<h:form id="addproject" enctype="multipart/form-data">
+	<table border="0"  cellpadding="0"	cellspacing="1">
+		<tr>
+			<th id="thtitle" colspan="8">案件受理</th>	
+		</tr>
+		<tr>
+			
+   			<td >
+  				<h:outputText rendered="#{(ProjectEdit.operatetype == 0)}" value="档案编号(请输入整数序号)：" />
+  			</td>
+  			<td>
+				<p:inputText rendered="#{(ProjectEdit.operatetype == 0)}" value="#{ProjectEdit.pcode}" maxlength="30"/>
+			</td>
+			<td>
+				<p:outputLabel rendered="#{(ProjectEdit.operatetype == 0)}">
+				<FONT face="宋体" color="red">&nbsp;&nbsp;注意*：若不输入，系统将自动生成档案编号。</FONT>
+				</p:outputLabel>
+   			</td>
+      		<td>
+				<h:outputText rendered="#{(ProjectEdit.operatetype == 0)}" value="是否直接归档：" />
+	   			<p:selectBooleanCheckbox rendered="#{(ProjectEdit.operatetype == 0)}" value="#{ProjectEdit.bEnd}" >
+	   			</p:selectBooleanCheckbox>
+   			</td>
+		</tr>
+		<tr >
+			<td align="right" ><FONT face="宋体" color="red">&nbsp;*</FONT>编 号：
+				<h:inputText style="display: none" value="#{ProjectEdit.project.idprojectFy}" />
+				<h:inputText style="display: none" value="#{ProjectEdit.project.processInstanceId}" />
+				<h:inputText style="display: none" value="#{ProjectEdit.operatetype}" />
+				<h:selectOneMenu rendered="#{(ProjectEdit.operatetype == 0)}" required="true" value="#{ProjectEdit.pletter}" styleClass="select">  
+       					<f:selectItem itemLabel="A" itemValue="A"/>
+       					<f:selectItem itemLabel="B" itemValue="B"/>
+       					<f:selectItem itemLabel="C" itemValue="C"/>
+       					<f:selectItem itemLabel="D" itemValue="D"/>
+       					<f:selectItem itemLabel="E" itemValue="E"/>
+       					<f:selectItem itemLabel="F" itemValue="F"/>
+       					<f:selectItem itemLabel="G" itemValue="G"/>
+       			</h:selectOneMenu>
+       			<p:inputText rendered="#{(ProjectEdit.operatetype != 0)}" value="#{ProjectEdit.project.projectCode}" />
+			</td>
+			<td  align="right" ><FONT face="宋体" color="red">&nbsp;*</FONT>产权人：</td>
+			<td >
+				<p:inputText value="#{ProjectEdit.project.sellerName}" required="true" maxlength="30" />
+			</td>
+			<td align="right"><FONT face="宋体" color="red">&nbsp;*</FONT>产权证号：</td>
+			<td >
+			<p:inputText value="#{ProjectEdit.project.houseNumber}" required="true" size="30"/>
+			</td>
+			<td align="right">卖方电话：</td>
+			<td >
+				<p:inputText value="#{ProjectEdit.project.sellerTel}" maxlength="50" />
+			</td>
+			
+		</tr>
+		<tr>
+			<td  align="right" >
+			<FONT face="宋体" color="red">&nbsp;*</FONT>估价目的：
+			<h:selectOneMenu required="true" value="#{ProjectEdit.project.evaluatePurpose}" styleClass="select">  
+       					<f:selectItem itemLabel="公积金贷款" itemValue="公积金贷款"/>
+       					<f:selectItem itemLabel="银行贷款" itemValue="银行贷款"/>
+       					<f:selectItem itemLabel="司法鉴定" itemValue="司法鉴定"/>
+       					<f:selectItem itemLabel="价格咨询" itemValue="价格咨询"/>
+       					<f:selectItem itemLabel="房屋征收" itemValue="房屋征收"/>
+       		</h:selectOneMenu>
+			</td>
+			<td  align="right" >共有权人：</td>
+			<td >
+				<p:inputText value="#{ProjectEdit.project.ownerName}" maxlength="30" />
+			</td>
+			<td align="right">共有权证号：</td>
+			<td >
+			<p:inputText value="#{ProjectEdit.project.ownerNumber}" size="30"/>
+			</td>
+			
+			<td align="right">房产证登记日期：</td>
+			<td align="left">
+			<p:calendar pattern="yyyy年MM月dd日" size="14" locale="zh_CN" value="#{ProjectEdit.project.projectDate}" showButtonPanel="true" navigator="true" />
+			</td>
+		</tr>
+		<tr >
+			<td ></td>
+			<td align="right"><FONT face="宋体" color="red">&nbsp;*</FONT>买方：</td>
+			<td >
+				<p:inputText value="#{ProjectEdit.project.buyerName}" required="true" maxlength="30" />
+			</td>
+			<td  align="right" >买方电话：</td>
+			<td >
+				<p:inputText value="#{ProjectEdit.project.buyerTel}" maxlength="30" />
+			</td>
+			<td align="right">业务来源：</td>
+			<td>
+			<p:inputText value="#{ProjectEdit.project.projectSource}" maxlength="10"/>
+			</td>
+			<td ></td>
+		</tr>
+		</table>
+		
+		<table>
+		<tr >
+			<th id="thtitle" colspan="8">现场实勘</th>
+		</tr>
+		<tr>
+			<td align="right">物业所在小区：</td>
+			<td ><p:inputText value="#{ProjectEdit.project.wuyeAt}" maxlength="10" />
+			</td>
+			<td align="right">新房产证号：</td>
+			<td ><p:inputText value="#{ProjectEdit.project.houseNewnumber}"/>
+			</td>
+			<td align="right">新房产证日期：</td>
+			<td ><p:calendar pattern="yyyy年MM月dd日" size="14" locale="zh_CN" value="#{ProjectEdit.project.newhouseDate}" showButtonPanel="true" navigator="true" />
+			</td>
+			<td align="right">建成年代：</td>
+			<td >
+				<p:calendar pattern="yyyy年" size="6"  locale="zh_CN" value="#{ProjectEdit.project.houseDate}" showButtonPanel="true" navigator="true" />
+			</td>
+			<td align="right">类似房屋成交价：</td>
+			<td>
+			单价：<p:inputText value="#{ProjectEdit.project.similarhouseSingle }" maxlength="10"/>元<br />
+			总价：<p:inputText value="#{ProjectEdit.project.similarhouseTotal }" maxlength="10"/>元
+			</td>
+		</tr>
+		<tr>
+			<td align="right">房产证复印件：</td>
+			<td >
+				<h:selectOneMenu value="#{ProjectEdit.project.houseNumberHas }" styleClass="select">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="已给" itemValue="1"/>
+       					<f:selectItem itemLabel="未给" itemValue="2"/>
+       			</h:selectOneMenu>
+			</td>
+			<td align="right">设计用途：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.houseUsing}" styleClass="select">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="成套住宅" itemValue="1"/>
+       					<f:selectItem itemLabel="非成套住宅" itemValue="4"/>
+       					<f:selectItem itemLabel="商业服务" itemValue="2"/>
+       					<f:selectItem itemLabel="办公" itemValue="3"/>
+       					<f:selectItem itemLabel="酒店式公寓" itemValue="5"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">房屋结构：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.houseConstruction}" styleClass="select">  
+						<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="钢混" itemValue="1"/>
+       					<f:selectItem itemLabel="混合" itemValue="2"/>
+       					<f:selectItem itemLabel="砖木" itemValue="3"/>
+       					<f:selectItem itemLabel="钢" itemValue="4"/>
+       		</h:selectOneMenu>
+       		</td>
+			<td align="right">房屋朝向：
+			<h:selectOneMenu value="#{ProjectEdit.project.houseFace}" styleClass="select">
+						<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="东" itemValue="1"/>
+       					<f:selectItem itemLabel="南" itemValue="2"/>
+       					<f:selectItem itemLabel="西" itemValue="3"/>
+       					<f:selectItem itemLabel="北" itemValue="4"/>
+       					<f:selectItem itemLabel="东南" itemValue="5"/>
+       					<f:selectItem itemLabel="东北" itemValue="6"/>
+       					<f:selectItem itemLabel="西南" itemValue="7"/>
+       					<f:selectItem itemLabel="西北" itemValue="8"/>
+       					<f:selectItem itemLabel="南北" itemValue="9"/>
+       					<f:selectItem itemLabel="东西" itemValue="10"/>
+       		</h:selectOneMenu>
+			</td>
+			<td >勘查日期：
+			<p:calendar pattern="yyyy年MM月dd日" size="14"  locale="zh_CN" value="#{ProjectEdit.project.kanchaDate}" showButtonPanel="true" navigator="true" />
+			</td>
+		</tr>
+		<tr>
+			<td align="right">土地性质：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.houseLandProperty}" styleClass="select">
+						<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="国有出让" itemValue="1"/>
+       					<f:selectItem itemLabel="国有划拨" itemValue="2"/>
+       					<f:selectItem itemLabel="集体所有" itemValue="3"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">所在楼层</td>
+			<td ><p:inputText value="#{ProjectEdit.project.houseAtLayer}" size="3" maxlength="5" />
+			<span>/</span>
+			<p:inputText value="#{ProjectEdit.project.houseLayers}" size="3" maxlength="5"/>
+			层
+			</td>
+			<td colspan="2">建筑面积：<p:inputText value="#{ProjectEdit.project.houseArea}" size="5" />
+			<span>平米</span><br />
+			<span>地下室：</span>
+			<p:inputText value="#{ProjectEdit.project.houseBasementArea}" size="4" /><span>平米（没有不填）</span>
+			</td>
+			<td align="right">户型：</td>
+			<td ><p:inputText value="#{ProjectEdit.project.houseUnit1 }" size="1"  maxlength="3" /><span>室</span><p:inputText value="#{ProjectEdit.project.houseUnit2 }" size="1" maxlength="3" /><span>厅</span>
+			<p:inputText value="#{ProjectEdit.project.houseUnit3 }" size="1" maxlength="3" /><span>厨</span><p:inputText value="#{ProjectEdit.project.houseUnit4 }" size="1" maxlength="3" /><span>卫</span>
+			<h:selectOneMenu value="#{ProjectEdit.project.houseUnit }" styleClass="select">
+						<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="标准间" itemValue="1"/>
+       					<f:selectItem itemLabel="复式" itemValue="2"/>
+       					<f:selectItem itemLabel="别墅" itemValue="3"/>
+       					<f:selectItem itemLabel="办公" itemValue="4"/>
+       					<f:selectItem itemLabel="商业" itemValue="5"/>
+       		</h:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">外墙：</td>
+			<td>
+				<p:inputText value="#{ProjectEdit.project.houseWaiqiang }" />
+			</td>
+			<td align="right">阳台：</td>
+			<td>
+			<h:selectOneMenu value="#{ProjectEdit.project.houseYangtai }" styleClass="select">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="封闭" itemValue="1"/>
+       					<f:selectItem itemLabel="未封闭" itemValue="2"/>
+       					<f:selectItem itemLabel="无" itemValue="3"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">装修：</td>
+			<td>
+			<h:selectOneMenu value="#{ProjectEdit.project.houseDecoration}" styleClass="select">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="毛坯" itemValue="3"/>
+       					<f:selectItem itemLabel="简装" itemValue="1"/>
+       					<f:selectItem itemLabel="精装" itemValue="2"/>
+       					<f:selectItem itemLabel="中装" itemValue="4"/>
+       					<f:selectItem itemLabel="豪华装修" itemValue="5"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">房屋样式：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.houseStyle}" styleClass="select">  
+       					<f:selectItem itemLabel="单元楼" itemValue="1"/>
+       					<f:selectItem itemLabel="点式楼" itemValue="2"/>
+       		</h:selectOneMenu>
+			</td>
+		</tr>
+		</table>
+<table>
+		<tr  >
+			<td align="right" style="width: 48px; " rowspan="9">房产状况：</td>
+			<td align="center" >装修</td>
+			<td align="center" >地面</td>
+			<td align="center" >墙面</td>
+			<td align="center" >顶棚</td>
+		</tr>
+		<tr>
+			<td align="right" style="width: 48px; ">客厅：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseKetingDimian }" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="地板砖" itemValue="地板砖"/>
+       					<f:selectItem itemLabel="木地板" itemValue="木地板"/>
+       					<f:selectItem itemLabel="地板革" itemValue="地板革"/>
+       					<f:selectItem itemLabel="水泥砂浆地面" itemValue="水泥砂浆地面"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseKetingQiangmian }"  effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="壁纸" itemValue="壁纸"/>
+       					<f:selectItem itemLabel="壁布" itemValue="壁布"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseKetingDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="吊顶" itemValue="吊顶"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">餐厅：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseCantingDimian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="地板砖" itemValue="地板砖"/>
+       					<f:selectItem itemLabel="木地板" itemValue="木地板"/>
+       					<f:selectItem itemLabel="地板革" itemValue="地板革"/>
+       					<f:selectItem itemLabel="水泥砂浆地面" itemValue="水泥砂浆地面"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseCantingQiangmian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="壁纸" itemValue="壁纸"/>
+       					<f:selectItem itemLabel="壁布" itemValue="壁布"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseCantingDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="吊顶" itemValue="吊顶"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">卧室：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWoshiDimian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="地板砖" itemValue="地板砖"/>
+       					<f:selectItem itemLabel="木地板" itemValue="木地板"/>
+       					<f:selectItem itemLabel="地板革" itemValue="地板革"/>
+       					<f:selectItem itemLabel="水泥砂浆地面" itemValue="水泥砂浆地面"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWoshiQiangmian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="壁纸" itemValue="壁纸"/>
+       					<f:selectItem itemLabel="壁布" itemValue="壁布"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWoshiDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="吊顶" itemValue="吊顶"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">厨房：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseChufangDimian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="防滑地板砖" itemValue="防滑地板砖"/>
+       					<f:selectItem itemLabel="马赛克" itemValue="马赛克"/>
+       					<f:selectItem itemLabel="水泥地面" itemValue="水泥地面"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseChufangQiangmian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="瓷片" itemValue="瓷片"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseChufangDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="PVC" itemValue="PVC"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">卫生间：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWeiDimain }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="防滑地板砖" itemValue="防滑地板砖"/>
+       					<f:selectItem itemLabel="马赛克" itemValue="马赛克"/>
+       					<f:selectItem itemLabel="水泥地面" itemValue="水泥地面"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWeiQiangmian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="瓷片" itemValue="瓷片"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseWeiDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="涂料" itemValue="涂料"/>
+       					<f:selectItem itemLabel="乳胶漆" itemValue="乳胶漆"/>
+       					<f:selectItem itemLabel="PVC" itemValue="PVC"/>
+       					<f:selectItem itemLabel="水泥砂浆" itemValue="水泥砂浆"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">毛坯房：</td>
+			<td align="center" colspan="1">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseMaopiDimian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="水泥砂浆拉毛" itemValue="水泥砂浆拉毛"/>
+       					<f:selectItem itemLabel="水泥砂浆抹平" itemValue="水泥砂浆抹平"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center" >
+				<p:selectOneMenu value="#{ProjectEdit.project.houseMaopiQiangmian }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="水泥砂浆抹平" itemValue="水泥砂浆抹平"/>
+       					<f:selectItem itemLabel="石灰罩白" itemValue="石灰罩白"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+			<td align="center">
+				<p:selectOneMenu value="#{ProjectEdit.project.houseMaopiDingpeng }" effect="fold" editable="true">  
+       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="水泥砂浆抹平" itemValue="水泥砂浆抹平"/>
+       					<f:selectItem itemLabel="石灰罩白" itemValue="石灰罩白"/>
+       					<f:selectItem itemLabel="涂料罩白" itemValue="涂料罩白"/>
+       			</p:selectOneMenu>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="right" >门、窗：</td>
+			<td colspan="3">
+			 	<p:selectBooleanCheckbox label="全选" value="#{ProjectEdit.allSelectWindow}">  
+		            <p:ajax update="window" listener="#{ProjectEdit.selectWindow}"/>  
+		        </p:selectBooleanCheckbox>
+		        <p:outputLabel>  默认</p:outputLabel>
+				<p:selectManyCheckbox id="window" layout="grid" columns="4" value="#{ProjectEdit.projectWindow}">
+		   			<f:selectItem itemValue="1" itemLabel="单层防盗门" />
+		   			<f:selectItem itemValue="2" itemLabel="双层防盗门" />
+		   			<f:selectItem itemValue="3" itemLabel="木门" />
+		   			<f:selectItem itemValue="4" itemLabel="木窗" />
+		   			<f:selectItem itemValue="5" itemLabel="塑钢窗" />
+		   			<f:selectItem itemValue="6" itemLabel="铝合金窗" />
+		   			<f:selectItem itemValue="7" itemLabel="钢窗" />
+		   			<f:selectItem itemValue="8" itemLabel="彩铝窗" />		   			
+		   		</p:selectManyCheckbox>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">配套设施：</td>
+			<td colspan="3" >
+				<p:selectBooleanCheckbox  value="#{ProjectEdit.allSelectSupport}">  
+		            <p:ajax update="support" listener="#{ProjectEdit.selectSupport}"/>  
+		        </p:selectBooleanCheckbox>
+		        <p:outputLabel>  默认</p:outputLabel>
+				<p:selectManyCheckbox id="support" layout="grid" columns="4" value="#{ProjectEdit.projectSupport}">
+		   			<f:selectItem itemValue="1" itemLabel="水" />
+		   			<f:selectItem itemValue="2" itemLabel="电" />
+		   			<f:selectItem itemValue="3" itemLabel="天然气" />
+		   			<f:selectItem itemValue="4" itemLabel="电话" />
+		   			<f:selectItem itemValue="5" itemLabel="闭路" />
+		   			<f:selectItem itemValue="6" itemLabel="宽带" />
+		   			<f:selectItem itemValue="7" itemLabel="电梯" />
+		   			<f:selectItem itemValue="8" itemLabel="门禁系统" />
+		   			<f:selectItem itemValue="9" itemLabel="中央空调" />
+		   			<f:selectItem itemValue="10" itemLabel="柜挂式空调" />
+		   			<f:selectItem itemValue="11" itemLabel="集中供暖" />
+		   			<f:selectItem itemValue="12" itemLabel="土暖" />
+		   			<f:selectItem itemValue="13" itemLabel="地暖" />
+		   			<f:selectItem itemValue="14" itemLabel="壁挂" />
+		   			<f:selectItem itemValue="15" itemLabel="自动消防" />
+		   			<f:selectItem itemValue="16" itemLabel="消防栓" />
+		   		</p:selectManyCheckbox>
+			</td>
+		</tr>
+		</table>
+
+		<table>
+		<tr>
+			<td align="right">物业名称：</td>
+			<td>
+			<p:inputText value="#{ProjectEdit.project.wuyeName}" maxlength="20" />
+			</td>
+			
+			<td align="right">物业规模:</td>
+			<td>
+				<h:selectOneMenu value="#{ProjectEdit.project.wuyeExtent}" styleClass="select">  
+	       					<f:selectItem itemLabel="小" itemValue="1"/>
+	       					<f:selectItem itemLabel="中" itemValue="2"/>
+	       					<f:selectItem itemLabel="大" itemValue="3"/>
+	       		</h:selectOneMenu>
+			</td>
+			<td align="right">物业管理：</td>
+			<td >
+				<h:selectOneMenu value="#{ProjectEdit.project.wuyeManager }" styleClass="select">  
+	       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+	       					<f:selectItem itemLabel="无" itemValue="3"/>
+	       					<f:selectItem itemLabel="单位物业管理" itemValue="1"/>
+	       					<f:selectItem itemLabel="专业物业管理" itemValue="2"/>
+	       		</h:selectOneMenu>
+			</td>
+			<td align="right">是否列入拆迁范围</td>
+			<td >
+				<h:selectOneMenu value="#{ProjectEdit.project.houseWillRemove }" styleClass="select">  
+	       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+	       					<f:selectItem itemLabel="是" itemValue="1"/>
+	       					<f:selectItem itemLabel="否" itemValue="2"/>
+	       		</h:selectOneMenu>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">绿化：</td>
+			<td>
+				<h:selectOneMenu value="#{ProjectEdit.project.houseLvhua }" styleClass="select">  
+	       					<f:selectItem itemLabel="未选择" itemValue="0"/>
+	       					<f:selectItem itemLabel="无" itemValue="1"/>
+	       					<f:selectItem itemLabel="一般" itemValue="2"/>
+	       					<f:selectItem itemLabel="较好" itemValue="3"/>
+	       					<f:selectItem itemLabel="良好" itemValue="4"/>
+	       		</h:selectOneMenu>
+			</td>
+			
+			<td align="right">小区规模:</td>
+			<td>
+				<h:selectOneMenu value="#{ProjectEdit.project.xiaoquExtent}" styleClass="select">  
+							<f:selectItem itemLabel="未选择" itemValue="0"/>
+	       					<f:selectItem itemLabel="小" itemValue="1"/>
+	       					<f:selectItem itemLabel="中" itemValue="2"/>
+	       					<f:selectItem itemLabel="大" itemValue="3"/>
+	       		</h:selectOneMenu>
+			</td>
+			<td align="right">利用现状：</td>
+			<td >
+			<p:inputText value="#{ProjectEdit.project.houseUse}" maxlength="30" />
+			</td>
+			<td colspan="2">每栋<p:inputText value="#{ProjectEdit.project.houseUnitNum}" size="2" />单元
+			<p:inputText value="#{ProjectEdit.project.houseHolds}" size="2" />户
+			</td>
+		</tr>
+		<tr >
+			<td align="right">房屋坐落</td>
+			<td colspan="3" >
+				<p:inputText value="#{ProjectEdit.project.houseXy}" size="50" maxlength="100"/>
+			</td>
+			<td align="right">房屋性质：</td>
+			<td colspan="2" >
+			<h:selectOneMenu value="#{ProjectEdit.project.houseProperty}" styleClass="select">  
+						<f:selectItem itemLabel="未选择" itemValue="0"/>
+       					<f:selectItem itemLabel="商品房" itemValue="1"/>
+       					<f:selectItem itemLabel="经适房" itemValue="2"/>
+       					<f:selectItem itemLabel="房改房" itemValue="3"/>
+       					<f:selectItem itemLabel="安居工程" itemValue="4"/>
+       		</h:selectOneMenu>
+			</td>
+			<td >
+			层高：<p:inputText value="#{ProjectEdit.project.houseLayerHeight}" size="4"/>米
+			</td>
+			
+		</tr>
+		<tr >
+			<td rowspan="5" class="td01">市场区域分析：<br />(每行最多输入45字)
+			</td>
+			<td align="right">东路：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.roadEast}" size="50" maxlength="45"/>
+			</td>
+			<td align="right">西路：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.roadWest}" size="50" maxlength="45"/>
+			</td>
+		</tr>
+		<tr >
+			<td align="right">南路：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.roadSouth}" size="50" maxlength="45"/>
+			</td>
+			<td align="right">北路：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.roadNorth}" size="50" maxlength="45"/>
+			</td>
+		</tr>
+		<tr >
+			<td align="right">周边设施：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.aroundMarket}" size="50" maxlength="45"/>
+			</td>
+			<td align="right">周边交通：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.aroundTraffic}" size="50" maxlength="45"/>
+			</td>
+		</tr>
+		<tr >
+			<td align="right">估价对象范围：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.referMin}" size="6"/>~<p:inputText value="#{ProjectEdit.project.referMax}" size="6"/>
+				元/平方米
+			</td>
+			<td align="right">变现价格：</td>
+			<td colspan="2" >
+				<p:inputText value="#{ProjectEdit.project.referTotal}" size="4"/>万元
+			</td>
+		</tr>
+		<tr >
+			<td colspan="7">
+				<p:outputLabel>
+				<FONT face="宋体" color="red">*输出示例：&nbsp;</FONT><br />
+					&nbsp;&nbsp;&nbsp;&nbsp;估价对象位于 {XX位置}，东有{东路}，南有{南路}，北有{北路}，西有{西路}，四周主要有{周边设施}，道路通达，交通便捷，附近有{周边交通}。<br />
+					&nbsp;&nbsp;&nbsp;&nbsp;估价对象所处区域同类房产成交价在{参考价格范围}元/平方米之间，经综合分析与比较，估价对象快速变现参考价为{变现价格}万元。
+				</p:outputLabel>
+			</td>
+		</tr>
+		
+		<tr >
+			<td class="td01">附件列表</td>
+			<td colspan="3" style="height: 275px; ">
+				<div style="height:80%; overflow-x:hidden;overflow-y:auto;" class="kj-main" id="kj"><h:dataTable width="100%" id="tb1" border="0" headerClass="Freezing"
+					cellspacing="0" cellpadding="0" value="#{ProjectEdit.listFiles}"
+					styleClass="wap1" var="prj">
+					<h:column>
+						<f:facet name="header">
+						<h:outputText value="附件名称"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{prj.name}" id="filename" ></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+						<h:outputText value="大小"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{prj.filesize/1024}k" ></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+						<h:outputText value="上传时间"></h:outputText>
+						</f:facet>
+						<h:outputText value="#{prj.uploadTime}" ><f:convertDateTime timeZone="GMT+8" pattern="yyyy-MM-dd hh:mm:ss" /></h:outputText>
+					</h:column>
+					<h:column>
+						<h:commandLink value="下载" immediate="true" actionListener="#{ProjectEdit.DownloadFileAction}" >
+							<f:attribute name="file" value="#{prj}"/>
+						</h:commandLink>
+					</h:column>
+					<h:column>
+						<h:commandLink value="删除" actionListener="#{ProjectEdit.DeleteFileAction}" >
+							<f:attribute name="file" value="#{prj}"/>
+						</h:commandLink>
+					</h:column>
+					</h:dataTable>
+					</div>
+			</td>
+			<td class="td01">项目图片</td>
+			
+			<td colspan="3">
+			<p:outputLabel style="color:red;font-size:22px">注意：单击下面的图片名可以修改图片名称。<br />导出预评报告时，需要有名称为pic1.jpg的图片作为报告地图的输出。</p:outputLabel>
+				 <p:dataGrid id="picshow" var="image" value="#{ProjectEdit.listPics}" columns="2"  
+			        rows="4" paginator="true"  
+			        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  >  
+			  
+			        <p:panel style="text-align:center">  
+			            <h:panelGrid style="width:100%">  
+				            <f:facet name="header">
+				            	<p:inplace editor="true">
+					                <p:inputText value="#{image.name}"  valueChangeListener="#{ProjectEdit.PicChangeName}"
+					                            required="true" label="text"/>  
+					            </p:inplace>
+						    </f:facet>
+							<p:graphicImage width="200" height="200" value="/data/#{image.projectcode}/#{(image.type == 1)? 'pictures':'files'}/#{image.name}"/>
+			            	<h:outputText value="上传日期：#{image.uploadTime}" />
+			            	<h:outputText value="图片大小：#{image.filesize/1000}KB" />
+				        	<p:commandLink update="picshow" value="删除" actionListener="#{ProjectEdit.DeletePicAction}">
+			                    <f:attribute name="image" value="#{image}"/> 
+			                </p:commandLink>
+			                 
+			            </h:panelGrid>  
+			        </p:panel>  
+			  
+			    </p:dataGrid>
+			</td>
+
+		</tr>
+		
+		<tr >
+			<td class="td01">文件上传</td>
+			<td colspan="6">
+
+				<p:fileUpload id="fileupload" fileUploadListener="#{ProjectEdit.UploadFile}"  
+				            mode="advanced"  
+				            update="picshow,tb1,message"   
+				            multiple="true"  
+				            cancelLabel="取消"
+				            uploadLabel="上传"
+				            label="选择"
+				            invalidSizeMessage="文件超过大小"
+				            sizeLimit="20000000" />  
+
+    			<p:growl id="message" showDetail="false" />
+
+			</td>
+			<td>
+			 <p:outputLabel>注意：单个文件上传最大20M。</p:outputLabel><br />
+			  
+			</td>
+		</tr>
+		</table>
+		<table>
+		<tr >
+			<th id="thtitle" colspan="8">预评撰写</th>
+		</tr>
+		<tr >
+			<td colspan="2" align="right">评估计算方法：</td>
+			<td colspan="6">
+				<p:commandButton id="showDialogButton" rendered="#{(ProjectEdit.operatetype > 2)}" type="button" value="市场比较法" onclick="PF('dlg').show();" /> 
+				<p:dialog header="市场比较法" widgetVar="dlg"   modal="true" closeOnEscape="true" >  
+				    
+				    	<p:fieldset toggleable="true" legend="对象及可对比实例比较">
+				    		<p:dataTable id="instanceTable" var="instance" value="#{ProjectEdit.instances}"  editable="true" editMode="cell">
+				    			<p:ajax event="cellEdit" listener="#{ProjectEdit.onInstanceCellEdit}" />
+				    			 <p:columnGroup type="header">
+				    			 	<p:row>  
+						                <p:column rowspan="2" headerText="对象及可比实例" />  
+						                <p:column rowspan="2" headerText="坐落" />
+						                <p:column rowspan="2" headerText="交易日期" />
+						                <p:column rowspan="2" headerText="交易情况" />
+						                <p:column rowspan="2" headerText="交易价格" />
+						                <p:column colspan="5" headerText="区域因素" />
+						                <p:column colspan="9" headerText="个别因素" />  
+						            </p:row>
+						            <p:row>
+						            	<p:column headerText="商服繁华度" />
+						            	<p:column headerText="景观" />
+						            	<p:column headerText="交通条件" />
+						            	<p:column headerText="区域环境" />
+						            	<p:column headerText="基础设施" />
+						            	
+						            	<p:column headerText="建筑结构" />
+						            	<p:column headerText="户型" />
+						            	<p:column headerText="采光、通风" />
+						            	<p:column headerText="建筑装修" />
+						            	<p:column headerText="建成年代" />
+						            	<p:column headerText="小区环境" />
+						            	<p:column headerText="建筑朝向" />
+						            	<p:column headerText="楼层" />
+						            	<p:column headerText="配套设施" />
+						            </p:row>
+						            </p:columnGroup>
+						            <p:column id="name">
+										<h:outputText value="#{instance.name}" />
+						            </p:column>
+						            <p:column id="location">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.location}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText id="islocation" value="#{instance.location}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="sellDate">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.sellDate}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.sellDate}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="sellStatus">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.sellStatus}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.sellStatus}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="price">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.price}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.price}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="businessdegree">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.businessdegree}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.businessdegree}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="landscape">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.landscape}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.landscape}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="traffic">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.traffic}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.traffic}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="environment">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.environment}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.environment}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="base">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.base}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.base}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="construction">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.construction}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.construction}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="unit">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.unit}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.unit}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="light">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.light}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.light}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="decoration">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.decoration}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.decoration}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="buildDate">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.buildDate}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.buildDate}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="community">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.community}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.community}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="face">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.face}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.face}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="layer">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.layer}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.layer}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="support">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{instance.support}" /></f:facet>  
+							            	<f:facet name="input"><p:inputText value="#{instance.support}" /></f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+				    		</p:dataTable>
+						</p:fieldset>
+						<p:fieldset toggleable="true" legend="计算参数">
+							<p:dataTable id="parameterTable" var="parame" value="#{ProjectEdit.parameters}"   editable="true" editMode="cell">
+								<p:ajax event="cellEdit" listener="#{ProjectEdit.onParameterCellEdit}" />
+				    			 <p:columnGroup type="header">
+				    			 	<p:row>  
+						                <p:column rowspan="2" headerText="对象及可比实例" />  
+						                <p:column rowspan="2" headerText="坐落" />
+						                <p:column rowspan="2" headerText="交易日期" />
+						                <p:column rowspan="2" headerText="交易情况" />
+						                <p:column rowspan="2" headerText="交易价格" />
+						                <p:column colspan="5" headerText="区域因素" />
+						                <p:column colspan="9" headerText="个别因素" />  
+						            </p:row>
+						            <p:row>
+						            	<p:column headerText="商服繁华度" />
+						            	<p:column headerText="景观" />
+						            	<p:column headerText="交通条件" />
+						            	<p:column headerText="区域环境" />
+						            	<p:column headerText="基础设施" />
+						            	
+						            	<p:column headerText="建筑结构" />
+						            	<p:column headerText="户型" />
+						            	<p:column headerText="采光、通风" />
+						            	<p:column headerText="建筑装修" />
+						            	<p:column headerText="建成年代" />
+						            	<p:column headerText="小区环境" />
+						            	<p:column headerText="建筑朝向" />
+						            	<p:column headerText="楼层" />
+						            	<p:column headerText="配套设施" />
+						            </p:row>
+						            </p:columnGroup>
+						            <p:column id="name">
+										<h:outputText value="#{parame.name}" />
+						            </p:column>
+						            <p:column id="location">
+							            <h:outputText value="#{parame.location}" />  
+						            </p:column>
+						            <p:column id="sellDate">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.sellDate}" /></f:facet>  
+							            	<f:facet name="input">
+								            	<p:inputText value="#{parame.sellDate}" required="true" >
+								            		<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="sellStatus">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.sellStatus}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.sellStatus}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="price">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.price}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.price}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="businessdegree">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.businessdegree}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.businessdegree}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="landscape">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.landscape}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.landscape}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="traffic">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.traffic}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.traffic}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="environment">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.environment}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.environment}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="base">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.base}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.base}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="construction">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.construction}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.construction}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="unit">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.unit}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.unit}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="light">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.light}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.light}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="decoration">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.decoration}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.decoration}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="buildDate">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.buildDate}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.buildDate}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="community">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.community}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.community}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="face">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.face}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.face}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="layer">
+						            	<p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.layer}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.layer}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+						            <p:column id="support">
+						            <p:cellEditor>
+							            	<f:facet name="output"><h:outputText value="#{parame.support}" /></f:facet>  
+							            	<f:facet name="input">
+							            		<p:inputText value="#{parame.support}" >
+							            			<f:validateLongRange minimum="0" />
+								            	</p:inputText>
+							            	</f:facet>  
+							            </p:cellEditor>
+						            </p:column>
+				    		</p:dataTable>
+						</p:fieldset>
+			            <p:fieldset id="calcresult"  toggleable="true" legend="计算结果">
+			            	<table >
+			            		<tr>  
+									<td align="right" >估价对象比准价格：</td>
+							        <td ><FONT color="red">
+							        	<h:outputText value="#{ProjectEdit.calcPrices}" >
+							        		<f:convertNumber maxFractionDigits="2" pattern="#0.00" />
+							        	</h:outputText>元
+							        </FONT></td>
+							    	<td align="right">面积：</td>
+							    	<td ><h:outputText value="#{ProjectEdit.project.houseArea}平米" /></td>
+							    	<td align="right">所在楼总层数：</td>
+							    	<td ><h:outputText value="#{ProjectEdit.project.houseLayers}" /></td>
+							    </tr>
+							    <tr>
+							    	<td rowspan="2">优先受偿款</td>
+							    	<td >出让金</td>
+							    	<td ><FONT color="red">
+							    		<h:outputText value="#{ProjectEdit.landPrices * ProjectEdit.project.houseArea}" >
+							    			<f:convertNumber maxFractionDigits="2" pattern="#0.00" />
+							    		</h:outputText>元
+							    	</FONT></td>
+							    	<td >所在土地级别</td>
+							    	<td >
+							    		<p:inplace editor="true">
+							                <p:inputText value="#{ProjectEdit.landLevel}" required="true"/>  
+							            </p:inplace>
+							    	</td>
+							    	<td align="right">分摊土地面积</td>
+							    	<td ><FONT color="red">
+								    	<h:outputText value="#{ProjectEdit.project.houseArea / ProjectEdit.project.houseLayers}" >
+								    		<f:convertNumber maxFractionDigits="2" pattern="#0.00" />
+								    	</h:outputText>
+								    	平米
+							    	</FONT></td>
+							    </tr>
+							    <tr>
+							    	<td >抵押权利价值</td>
+							    	<td ><FONT color="red">
+							    		<p:inplace editor="true">  
+							                <p:inputText value="#{ProjectEdit.diyaMoney}" required="true"/>
+							            </p:inplace>
+							            <h:outputText value="元" />
+							    	</FONT></td>
+							    	<td >该级别土地出让金标准</td>
+							    	<td ><FONT color="red">
+							    		<p:inplace editor="true">  
+							                <p:inputText value="#{ProjectEdit.landPrices}" required="true"/>
+							            </p:inplace>
+							            <h:outputText value="元/平米" />
+							    	</FONT></td>
+							    	<td >抵押价值</td>
+							    	<td ><FONT color="red"><h:outputText value="#{ProjectEdit.project.houseEvaluateTotal}元" /></FONT></td>
+							    	<td >折合单价</td>
+							    	<td ><FONT color="red"><h:outputText value="#{ProjectEdit.project.houseEvaluateSingle} 元/平米" /></FONT></td>
+							    </tr>
+			            	</table>
+			            </p:fieldset>
+			            <p:commandButton  value="计算" actionListener="#{ProjectEdit.CalcResult}" update="calcresult" />
+			            <p:commandButton  value="保存并关闭" actionListener="#{ProjectEdit.SaveResult}" update="price1,price2" oncomplete="dlg.hide();"/>
+				</p:dialog>  
+			</td>
+		</tr>
+		<tr >
+			<td align="right">评估总价：</td>
+			<td >
+				<p:inputText id="price1" value="#{ProjectEdit.project.houseEvaluateTotal}" maxlength="20" />元
+			</td>
+			<td align="right">评估单价:</td>
+			<td >
+				<p:inputText id="price2" value="#{ProjectEdit.project.houseEvaluateSingle}" maxlength="20"/>元/平米
+			</td>
+			<td align="right">成交总价：</td>
+			<td>
+				<p:inputText value="#{ProjectEdit.project.houseFinalTotal}" maxlength="20" />元
+			</td>
+			<td align="right">成交单价:</td>
+			<td>
+				<p:inputText value="#{ProjectEdit.project.houseFinalSingle}" maxlength="20" />元/平米
+			</td>
+		</tr>
+		<tr>
+			<td align="right">成交方式：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.sellMode}" styleClass="select">  
+       					<f:selectItem itemLabel="正常" itemValue="1"/>
+       					<f:selectItem itemLabel="非正常" itemValue="2"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">税费负担方式：</td>
+			<td >
+			<h:selectOneMenu value="#{ProjectEdit.project.taxMode}" styleClass="select">  
+       					<f:selectItem itemLabel="各自" itemValue="1"/>
+       					<f:selectItem itemLabel="买方" itemValue="2"/>
+       					<f:selectItem itemLabel="卖方" itemValue="3"/>
+       		</h:selectOneMenu>
+			</td>
+			<td align="right">成交日期：</td>
+			<td >
+			<p:calendar pattern="yyyy年MM月dd日" size="14" locale="zh_CN" value="#{ProjectEdit.project.sellDate}" showButtonPanel="true" navigator="true" />
+			</td>
+			<td align="right"><FONT face="宋体" color="red">*</FONT>评估收费:</td>
+			<td>
+			<p:inputText value="#{ProjectEdit.project.pingguMoney}" maxlength="10"/>
+			</td>
+		</tr>
+
+		<tr >
+			<th id="thtitle" colspan="8">流程记录</th>
+		</tr>
+		<tr >
+			<td class="td01">前一个流程意见：</td>
+			<td colspan="3"><h:inputTextarea readonly="true" value="#{ProjectEdit.project.projectComment}" cols="125" rows="6" onkeyup="" style="width: 471px; "/></td>
+			<td class="td01">流程意见：</td>
+			<td colspan="3"><h:inputTextarea value="#{ProjectEdit.processOpinion}" cols="125" rows="6" onkeyup="" style="width: 533px; "/></td>
+		</tr>
+		<tr>
+			<td colspan="9" align="center">
+				<h:commandButton value="保  存" action="#{ProjectEdit.InsertProject}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="评估完成" action="#{ProjectEdit.PingguComplete}" rendered="#{(ProjectEdit.operatetype == 3)}" styleClass="btn01"/>
+				<h:commandButton value="勘查完成" action="#{ProjectEdit.KanchaComplete}"  rendered="#{(ProjectEdit.operatetype == 2)}" styleClass="btn01" />
+				
+				<h:commandButton value="审查通过" action="#{ProjectEdit.ShenchaPass}" rendered="#{(ProjectEdit.operatetype == 4)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="审查不通过" action="#{ProjectEdit.ShenchaUnpass}" rendered="#{(ProjectEdit.operatetype == 4)}" styleClass="btn01"/>
+
+				<h:commandButton value="审批通过" action="#{ProjectEdit.ShenpiPass}" rendered="#{(ProjectEdit.operatetype == 5)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="审批不通过" action="#{ProjectEdit.ShenpiUnpass}" rendered="#{(ProjectEdit.operatetype == 5)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="导出预评" action="#{ProjectEdit.ExportYPWord}" rendered="#{(ProjectEdit.operatetype > 2)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="导出正式" action="#{ProjectEdit.ExportOfficialWord}" rendered="#{(ProjectEdit.operatetype > 2)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="结果报告" action="#{ProjectEdit.ExportResult}" rendered="#{(ProjectEdit.operatetype > 2)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="预评已出具" action="#{ProjectEdit.CompletedYP}" rendered="#{(ProjectEdit.operatetype == 7)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:commandButton value="正式已出具" action="#{ProjectEdit.CompletedOfficial}" rendered="#{(ProjectEdit.operatetype == 8)}" styleClass="btn01"/>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<p:commandButton styleClass="btn01" value="返回" oncomplete="window.history.back();" />
+			</td>
+		</tr>
+	</table>
+	</h:form>
+</f:view>
+<script language="javascript">
+
+PrimeFaces.locales['zh_CN'] = {
+    closeText: '关闭',
+    prevText: '上个月',
+    nextText: '下个月',
+    currentText: '今天',
+    monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+    monthNamesShort: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+    dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+    dayNamesShort: ['日','一','二','三','四','五','六'],
+    dayNamesMin: ['日','一','二','三','四','五','六'],
+    weekHeader: '周',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: true,
+    yearSuffix: '', // 年
+    timeOnlyTitle: '仅时间',
+    timeText: '时间',
+    hourText: '时',
+    minuteText: '分',
+    secondText: '秒',
+    ampm: false,
+    month: '月',
+    week: '周',
+    day: '日',
+    allDayText : '全天'
+};
+
+</script>
+</html>

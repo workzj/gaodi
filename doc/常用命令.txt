@@ -1,0 +1,22 @@
+ps -ef|grep tomcat
+
+kill -9 12676
+
+Mysql>source 【sql脚本文件的路径全名】
+
+/etc/rc.d/init.d/mysqld start
+
+
+数据库备份 ( /usr/bin ) ：
+mysqldump -P8201 -uroot -p --default-character-set=utf8 --skip-opt test >test.sql
+
+如果要在MyEclipse里面启动tomcat，设置JVM参数时，需要在如下位置设置，
+Window->Preferences->MyEclipse Enterprise Workbench->Servers->Tomcat 6.x->JDK->Optional Java VM arguments:
+-Xms1024m 
+-Xmx1024m
+-XX:PermSize=128M 
+-XX:MaxPermSize=256m
+-XX:MaxNewSize=256m
+-Dorg.apache.el.parser.COERCE_TO_ZERO=false
+
+joe.zhujiang@gmail.com's googlecode.com password: fw4Bt5uV8Nh9

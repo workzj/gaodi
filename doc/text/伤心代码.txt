@@ -1,0 +1,24 @@
+@ManagedProperty (value="#{studentsService}")
+
+//用户登录动作
+    public String loginAction(){
+
+    	String str = "success";
+    	ApplicationContext ctx = FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance());
+    	UserFyDAOImpl userfyDao = (UserFyDAOImpl)ctx.getBean("UserFyDAOImpl");
+    	
+    	List ls = userfyDao.findByName(userName);
+    	if(ls.size() == 1){
+    		UserFy userfy = (UserFy)ls.get(0);
+    		if(userfy.getPassword().equals(password)){
+    			str = "success";
+    		}    		
+    	}
+    	return str;
+    }
+
+
+<managed-property>
+			<property-name>UserFyDAOImpl</property-name>
+			<value>#{daoImpl}</value>
+		</managed-property>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="test" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="276,0,48,48" name="start1">
+      <transition name="to 业务登记" to="业务登记" g="-66,-18"/>
+   </start>
+   <end g="266,693,48,48" name="end1"/>
+   <task g="252,72,92,52" name="业务登记">
+      <transition name="to 现场勘查" to="现场勘查" g="-66,-18"/>
+   </task>
+   <task g="251,146,92,52" name="现场勘查">
+      <transition name="to 预评撰写" to="预评撰写" g="-66,-18"/>
+   </task>
+   <task g="252,216,92,52" name="预评撰写">
+      <transition name="to 预评审批" to="预评审批" g="-66,-18"/>
+   </task>
+   <task g="219,357,133,52" name="总公司审批预评报告">
+      <transition name="to 正式报告撰写" to="正式报告撰写" g="-90,-18"/>
+   </task>
+   <task g="248,278,92,52" name="预评审批">
+      <transition name="to 总公司审批预评报告" to="总公司审批预评报告" g="-126,-18"/>
+   </task>
+   <task g="235,449,92,52" name="正式报告撰写">
+      <transition name="to 正式报告审批" to="正式报告审批" g="-90,-18"/>
+   </task>
+   <task g="239,530,92,52" name="正式报告审批">
+      <transition name="to 总公司审批正式报告" to="总公司审批正式报告" g="-126,-18"/>
+   </task>
+   <task g="221,612,135,52" name="总公司审批正式报告">
+      <transition name="to end1" to="end1" g="-42,-18"/>
+   </task>
+</process>

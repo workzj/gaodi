@@ -1,0 +1,2 @@
+Driver name : com.mysql.jdbc.Driver
+Á¬½Ó´®£»jdbc:mysql://localhost:8201/test

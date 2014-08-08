@@ -1,0 +1,8 @@
+delimiter $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `del_seq`()
+BEGIN
+	DELETE FROM project_sequence;
+
+	ALTER TABLE project_sequence AUTO_INCREMENT =1;
+END$$

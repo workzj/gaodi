@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="test1" xmlns="http://jbpm.org/4.4/jpdl">
+   <start g="271,19,92,48" name="start1">
+      <transition g="-71,-17" name="to 业务受理" to="业务受理"/>
+   </start>
+   <end g="271,793,92,48" name="归档"/>
+   <task assignee="#{user}" g="249,90,92,52" name="业务受理">
+      <transition g="-71,-17" name="to 现场勘查" to="现场勘查"/>
+      <transition g="478,115;477,817:-47,-17" name="to 归档" to="归档"/>
+   </task>
+   <task candidate-groups="kancha" g="249,171,92,52" name="现场勘查">
+      <transition g="-71,-17" name="to 预评撰写" to="预评撰写"/>
+      <transition g="55,197;57,815:-28,-15" name="撤件" to="归档"/>
+   </task>
+   <task candidate-groups="pinggu" g="249,249,92,52" name="预评撰写">
+      <transition g="-71,-5" name="to 预评审查" to="预评审查"/>
+      <transition g="94,259;92,791:-26,-17" name="撤件" to="归档"/>
+   </task>
+   <task candidate-groups="manager" g="249,348,92,52" name="预评审查">
+      <transition g="203,376;202,276:-71,-17" name="to 预评撰写" to="预评撰写"/>
+      <transition g="-70,-4" name="to 预评审批" to="预评审批"/>
+      <transition g="144,407;143,786:-28,-14" name="撤件" to="归档"/>
+   </task>
+   <task candidate-groups="shenpi" g="249,445,92,52" name="预评审批">
+      <transition g="407,472;409,273:-71,-41" name="to 预评撰写" to="预评撰写"/>
+      <transition g="-95,-10" name="to 出具预评报告" to="出具预评报告"/>
+      <transition g="453,495;451,793:-25,-32" name="撤件" to="归档"/>
+   </task>
+   <task assignee="#{pinggu}" g="241,529,107,52" name="出具预评报告">
+      <transition g="-94,-11" name="to 出具正式报告" to="出具正式报告"/>
+      <transition g="416,558;415,781:-24,-16" name="撤件" to="归档"/>
+   </task>
+   <task assignee="#{pinggu}" g="242,609,106,52" name="出具正式报告">
+      <transition g="-71,-17" name="to 送达报告" to="送达报告"/>
+      <transition g="199,630;200,789:-28,-19" name="撤件" to="归档"/>
+   </task>
+   <task candidate-groups="worker" g="249,692,92,52" name="送达报告">
+      <transition g="-47,-17" name="to 归档" to="归档"/>
+   </task>
+   <migrate-instances />
+</process>

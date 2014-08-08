@@ -1,0 +1,11 @@
+				<f:facet name="header"><h:outputText value="É¾³ý"></h:outputText></f:facet>
+				<h:commandButton onclick="#"
+				 actionListener="#" 
+				 image="images/yywh/delete.jpg"
+				 id="delete" 
+				 value ="É¾³ý" >
+					<f:attribute name="DicId" value="#"/>
+				</h:commandButton>
+<div class="list-div">
+				<h:outputText value="#" title="#"></h:outputText>&nbsp;
+				</div>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html	xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:ui="http://java.sun.com/jsf/facelets"
+			xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+<head>
+<style type="text/css">
+.list-row1-background{
+  background:#FFFFFF;
+}
+.list-row2-background{
+  background:#F1F1F1;
+}
+.kj-main{height:300px; overflow-x:hidden;overflow-y:auto;}
+.wap1{/* background:url(../images/table_bg.png);*/ color:#808080;}
+.wap1 th{ background:url(./images/th_bg.png) repeat-x top; width:auto; height:28px;   text-align:center; font-weight:normal; color:#262626;}
+.wap1 td{  height:28px; border-bottom:1px solid #d9d9d9;text-align:center;}
+*{ margin:0; padding:0; font-size:12px; font-family:Arial, Helvetica, sans-serif, "宋体"; color:#262626}
+th {           
+	position: relative;      
+	top: expression(document.getElementById("kj").scrollTop);            
+	z-index: 11;  
+}
+.list-div {
+  text-align: center;
+  width:100px;
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ 
+}
+</style>
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<title>查看流程节点</title>
+</head>
+<div class="header-top">
+<div class="l ptl40X10">北京高地经典房地产评估有限责任公司河南省分公司
+<br/>BEIJING GAODIJINGDIAN FANGDICHAN PINGGU GUANLI XITONG</div>
+<span class="r ptr10X15">
+<a onclick="history.back()" style="cursor: pointer;" title="返回">
+<img src="images/i_right.gif"/></a>
+</span>
+<span class="r ptr10X15">
+
+#{login.password}&nbsp;&nbsp;#{login.name}，欢迎您使用高地经典房地产评估系统。
+</span>  
+<div class="clear">
+</div>
+</div>
+<div>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr bgcolor="#BFDCE6" style="color: #262626;">
+                <td align="center" height="50px;">编号:</td>
+                <td align="left" ><h:outputText value="#{ProjectTrace.projectCode}"></h:outputText></td>
+                <td align="left">当前阶段:</td>
+                <td align="left" style="color: red;"><h:outputText value="#{ProjectTrace.nodeName}"></h:outputText></td>
+            </tr>
+            <tr>
+            	<td colspan="6" align="center">
+            		<h:graphicImage url="./images/test1.png"/>
+            	</td>
+            </tr>
+          </table>
+        </div>		
+		<div class="kj-main" style="overflow-y: auto; height: 280px; width:100%;" id="kj"><h:dataTable width="100%" border="0" headerClass="Freezing"
+			cellspacing="0" cellpadding="0" value="#{ProjectTrace.allprj}"
+			styleClass="wap1" var="prj"   rowClasses="list-row1-background ,list-row2-background" >
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="开始时间"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.beginTime}">
+					<f:convertDateTime timeZone="GMT+8" pattern="yyyy年MM月dd日 hh点mm分" />
+				</h:outputText>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header" >
+					<h:outputText value="经办人"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.assignee}"></h:outputText>&nbsp;
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="阶段"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.nodeName}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="办理意见"></h:outputText>
+				</f:facet>	
+				<h:outputText value="#{prj.opinion}" title="#{prj.opinion}"></h:outputText>&nbsp;
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="完成时间"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{prj.endTime}">
+					<f:convertDateTime timeZone="GMT+8" pattern="yyyy年MM月dd日 hh点mm分" />
+				</h:outputText>&nbsp;
+			</h:column>
+		</h:dataTable></div>
+</f:view>
+
+</html>
